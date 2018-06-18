@@ -49,7 +49,11 @@ def main():
     num = 0
     for (title, text, pageid) in extract_pages(bz2.BZ2File(args.dump)):
         text = filter_wiki(text)
-        text = any2unicode(text)
+        text = any2unicode(text, errors='ignore')
+
+        #Spacy has issues when text length exceeds 1000000
+        if len(text) > 900000:
+            continue
         doc = nlp(text)
 
         sentences = [sentence.string.strip() for sentence in doc.sents]
