@@ -1,17 +1,25 @@
 import argparse
-from gensim.corpora.wikicorpus import extract_pages, filter_wiki
+from gensim.corpora.wikicorpus import extract_pages, filter_wiki, WikiCorpus
 from gensim.utils import any2unicode
 import re
 import spacy
 import bz2
 import logging
+import signal
+from multiprocessing import Pool
 
-EMPH_P1 = re.compile(r'\'\'\'(\w+)\'\'\'')
+EMPH_P1 = re.compile(r'((\w+\s)+)?\'\'\'(-?\w+((\s\w+)+)?)\'\'\'')
+EMPH_P2 = re.compile(r'((\w+\s)+)?\'\'(-?\w+((\s\w+)+)?)\'\'')
+
+nlp = spacy.load('en', disable=['parser', 'tagger', 'ner'])
+nlp.add_pipe(nlp.create_pipe('sentencizer'))
+
 
 def setup_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-dump')
     parser.add_argument('-text')
+    parser.add_argument('-t', default=4, type=int)
     return parser.parse_args()
 
 
@@ -28,45 +36,59 @@ def ignore_sentence(sentence):
     if sentence.startswith('*'):
         return True
 
+    if sentence.startswith('{'):
+        return True
+
     return False
 
 
-def tokenize_text(sentence, nlp):
+def tokenize_text(sentence, lower):
     doc = nlp(sentence)
-    tokens = [token.text.lower() for token in doc]
+    tokens = [token.text.lower() if lower else token.text for token in doc]
     text = ' '.join(tokens)
     return text
+
+
+def clean_sentence(sentence):
+    sentence = re.sub(EMPH_P1, r'\3', sentence)
+    sentence = re.sub(EMPH_P2, r'\3', sentence)
+    return sentence
+
+
+def tokenize_spacy(text, token_min_len=-1, token_max_len=-1, lower=True):
+    #Spact constraints
+    text = text[:990000]
+    final_sentences = []
+    try:
+        doc = nlp(text)
+        for sentence in doc.sents:
+            sentence_text = sentence.string.strip()
+            if ignore_sentence(sentence_text):
+                continue
+            sentence_text = clean_sentence(sentence_text)
+            sentence_text = tokenize_text(sentence_text, lower)
+            if sentence_text:
+                final_sentences.append(sentence_text)
+
+        return final_sentences
+    except UnicodeEncodeError:
+        return final_sentences
 
 
 def main():
     args = setup_args()
     logging.info(args)
 
-    nlp = spacy.load('en', disable=['parser', 'tagger', 'ner'])
-    nlp.add_pipe(nlp.create_pipe('sentencizer'))
-
     fw = open(args.text, 'w')
-    num = 0
-    for (title, text, pageid) in extract_pages(bz2.BZ2File(args.dump)):
-        text = filter_wiki(text)
-        text = any2unicode(text, errors='ignore')
-
-        #Spacy has issues when text length exceeds 1000000
-        if len(text) > 900000:
-            continue
-        doc = nlp(text)
-
-        sentences = [sentence.string.strip() for sentence in doc.sents]
-        sentences = [sentence for sentence in sentences if not ignore_sentence(sentence)]
-        sentences = [re.sub(EMPH_P1, r'\1', sentence) for sentence in sentences]
-        sentences = [tokenize_text(sentence, nlp) for sentence in sentences]
-
+    corpus = WikiCorpus(args.dump, dictionary={'a'}, tokenizer_func=tokenize_spacy)
+    for index, sentences in enumerate(corpus.get_texts()):
         for sentence in sentences:
             fw.write('{}\n'.format(sentence))
 
-        if num % 10000 == 1:
-            logging.info('Completed {} articles'.format(num))
-        num += 1
+        if index % 10000 == 0:
+            logging.info('Done Article: {}'.format(index))
+
+    return
 
 
 if __name__ == '__main__':
