@@ -61,3 +61,35 @@ An interactive session can be fired as follows:
 ```bash
 (tf-wiki) python find_similar_sentence.py -sentences wiki.sentences.txt.uniq -ann wiki.annoy.index
 ```
+
+#### Examples
+`Input1`: The Japanese sample-return spacecraft Hayabusa2 arrives at the asteroid 162173 Ryugu.
+
+`Output1`:
+```
+the extraterrestrial ship from deep space enters the solar system and abducts a boater on earth .
+after a comet collides with the ship , dart and his crew discover a new planet beyond the orbit of pluto .
+the crew are on an expedition on the mysterious planet krop tor , impossibly in orbit around a black hole .
+hurtling on into deep space , jupiter 2 crash lands on an unknown planet .
+first flyby of pluto , charon , nix , hydra , kerberos , and styx , first up - close images of pluto system , first images of pluto and charon 's surfaces , first spacecraft to explore the kuiper belt .
+the fourth , and only , spaceship to return from mars holds an insane crew and a martian " furball " .
+drax plans to fire it at earth from space .
+voyager 2 sends back images of neptune and its system
+young man floats in escape pod after spacecraft explodes in deep space .
+crew returning from first manned moon expedition witnesses atomic war break out on earth .
+```
+
+`Input2`: ```Saudi Arabia lifts its ban on women driving.```
+`Output2:`
+```
+the campaign aims to ban saudi arabia from the olympics until it allows saudi arabian women to take part in sports .
+in september 2017 , the saudi arabian government announced that women would receive the right to drive , effective june 2018 .
+saudi arabia in 2015 .
+furthermore , the saudis are blocking a proposed causeway project between qatar and the uae and a proposed gas pipeline project between qatar and kuwait , because of saudi objections , the kuwaitis are now turning to the iranians for gas .
+saudi officials said that , if successful in qualifying , female competitors would be dressed " to preserve their dignity " .
+in 2015 , al - waleed was criticised for offering to buy bentley cars for saudi fighter pilots involved in the saudi arabian - led intervention in yemen .
+saudi arabia agreed to allow its women athletes to compete in the 2012 olympics for the first time , amidst speculation that the entire saudi team might have been disqualified on grounds of gender discrimination .
+* * 280px defense of saudi arabia 1990–1991
+after widespread rumors about saudi arabia going to purchase an entire atoll from maldives , saudi arabian embassy in maldives issued a statement against the rumors .
+saudi royal family after welcoming the new king salman of saudi arabia , january 27 , 2015
+```
