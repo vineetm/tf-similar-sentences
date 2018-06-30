@@ -24,6 +24,28 @@ This requires 15G of diskspace, and took us 2 hours. Speeds could wary. Feel fre
     
 ```bash
 cd code
-chmod +x download_wiki.sh
-./download_wiki.sh
+(tf-wiki) chmod +x download_wiki.sh
+(tf-wiki) ./download_wiki.sh
+```
+
+#### Extract Sentences 
+We use [gensim.wikicorpus](https://radimrehurek.com/gensim/corpora/wikicorpus.html) to parse XML. We replace default tokenizer to return sentences.
+
+This required us about 8 hours on a system with 8 cores. More cores should work faster!
+```bash
+(tf-wiki) python extract_sentences.py -dump enwiki-20180601-pages-articles.xml.bz2 -text wiki.sentences.txt 
+```
+This results in about 91M sentences
+```bash
+(tf-wiki) wc -l wiki.sentences.txt
+(tf-wiki) 91686995 wiki.sentences.txt
+```
+
+Further, extract unique sentences
+```bash
+(tf-wiki) python uniq_sentences.py -sentences wiki.sentences.txt -uniq wiki.sentences.txt.uniq  
+```
+```bash
+(tf-wiki) wc -l wiki.sentences.txt.uniq
+(tf-wiki) 53464766 wiki.sentences.txt.uniq
 ```
