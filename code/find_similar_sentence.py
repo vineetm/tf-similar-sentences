@@ -46,6 +46,7 @@ def main():
     sess = tf.Session()
     sess.run([tf.global_variables_initializer(), tf.tables_initializer()])
 
+    print_with_time('Ready!')
     while True:
         input_sentence = input('Enter sentence: ').strip()
 
