@@ -1,12 +1,9 @@
 import argparse
-from gensim.corpora.wikicorpus import extract_pages, filter_wiki, WikiCorpus
-from gensim.utils import any2unicode
+import logging
 import re
 import spacy
-import bz2
-import logging
-import signal
-from multiprocessing import Pool
+
+from gensim.corpora.wikicorpus import WikiCorpus
 
 EMPH_P1 = re.compile(r'((\w+\s)+)?\'\'\'(-?\w+((\s\w+)+)?)\'\'\'')
 EMPH_P2 = re.compile(r'((\w+\s)+)?\'\'(-?\w+((\s\w+)+)?)\'\'')
@@ -19,34 +16,22 @@ def setup_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-dump')
     parser.add_argument('-text')
-    parser.add_argument('-t', default=4, type=int)
     return parser.parse_args()
 
-
+IGNORE_STARTS=['{', *', #REDIRECT', '==']
 def ignore_sentence(sentence):
     if not sentence:
         return True
 
-    if sentence.startswith('#REDIRECT'):
-        return True
-
-    if sentence.startswith('=='):
-        return True
-
-    if sentence.startswith('*'):
-        return True
-
-    if sentence.startswith('{'):
-        return True
+    for ignore_start in IGNORE_STARTS:
+        if sentence.startswith(ignore_start):
+            return True
 
     return False
 
 
 def tokenize_text(sentence, lower):
-    doc = nlp(sentence)
-    tokens = [token.text.lower() if lower else token.text for token in doc]
-    text = ' '.join(tokens)
-    return text
+    return ' '.join([token.text.lower() if lower else token.text for token in nlp(sentence)])
 
 
 def clean_sentence(sentence):
@@ -56,7 +41,7 @@ def clean_sentence(sentence):
 
 
 def tokenize_spacy(text, token_min_len=-1, token_max_len=-1, lower=True):
-    #Spact constraints
+    #Spacy constraints
     text = text[:990000]
     final_sentences = []
     try:
