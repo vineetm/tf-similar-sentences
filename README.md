@@ -55,3 +55,9 @@ We use [Annoy Index](https://github.com/spotify/annoy) to index Wikipedia senten
 ```bash
 (tf-wiki) python build_annoy_index.py -sentences wiki.sentences.txt.uniq -ann wiki.annoy.index   
 ```
+
+#### Runtime Query
+An interactive session can be fired as follows:
+```bash
+python find_similar_sentence.py -sentences wiki.sentences.txt.uniq -ann wiki.annoy.index
+```
