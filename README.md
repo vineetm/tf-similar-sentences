@@ -1,6 +1,6 @@
 # tf-similar-sentences
 
-####Installation:
+#### Installation:
 * Clone the repo:
     ```bash
         git clone https://github.com/vineetm/tf-similar-sentences.git
@@ -19,7 +19,7 @@
     python -m spacy download en
     ```
 
-####Get English Wikipedia corpus 
+#### Get English Wikipedia corpus 
 This requires 15G of diskspace, and took us 2 hours. Speeds could wary. Feel free to replace the XML with [another version](https://dumps.wikimedia.org/enwiki/). You should look for files ending in `pages-articles.xml.bz2`    
     ```bash
     cd code
