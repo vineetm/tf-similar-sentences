@@ -1,0 +1,5 @@
+gensim
+spacy
+annoy
+tensorflow
+tensorflow_hub
