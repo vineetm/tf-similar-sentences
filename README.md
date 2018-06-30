@@ -79,7 +79,8 @@ young man floats in escape pod after spacecraft explodes in deep space .
 crew returning from first manned moon expedition witnesses atomic war break out on earth .
 ```
 
-`Input2`: ```Saudi Arabia lifts its ban on women driving.```
+`Input2`: Saudi Arabia lifts its ban on women driving.
+
 `Output2:`
 ```
 the campaign aims to ban saudi arabia from the olympics until it allows saudi arabian women to take part in sports .
@@ -92,4 +93,20 @@ saudi arabia agreed to allow its women athletes to compete in the 2012 olympics 
 * * 280px defense of saudi arabia 1990–1991
 after widespread rumors about saudi arabia going to purchase an entire atoll from maldives , saudi arabian embassy in maldives issued a statement against the rumors .
 saudi royal family after welcoming the new king salman of saudi arabia , january 27 , 2015
+```
+
+`Input3`: Ice drilling allows scientists studying glaciers and ice sheets to gain access to what is beneath the ice
+
+`Output3`:
+```
+ice melting on lake baikal - nasa earth observatory.jpg |spring ice melt underway on lake baikal , on 4 may : notice the ice - covered north , while much of the south already is ice - free .
+the volcano protrudes from the west antarctic ice cap and is itself covered with ice in its summit area .
+in addition to frozen water , mars ice caps also have frozen carbon dioxide , commonly known as dry ice .
+sea ice at the north pole in 2006
+a first chronology for the north greenland eemian ice drilling ( neem ) ice core .
+the arctic is affected by current global warming , leading to arctic sea ice shrinkage , diminished ice in the greenland ice sheet , and arctic methane release as the permafrost thaws .
+they proposed that changes in air circulation patterns have led to increased upwelling of warm , deep ocean water along the coast of antarctica and that this warm water has increased melting of floating ice shelves at the edge of the ice sheet .
+greenland ice sheet
+meanwhile , in the arctic , the frozen aurochs in an ice shelf start drifting into the ocean .
+file : antarctic peninsula , the larsen ice shelf , and the sea ice covered waters around the region.jpg|clear view of the antarctic peninsula , the larsen ice shelf , and the sea ice covered waters around the region .
 ```
