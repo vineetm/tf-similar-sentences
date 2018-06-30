@@ -5,6 +5,7 @@ import tensorflow_hub as hub
 import time
 import sys
 
+D=512
 
 def print_with_time(msg):
     print('{}: {}'.format(time.ctime(), msg))
@@ -21,7 +22,7 @@ def setup_args():
 
 
 def build_index(embedding_fun, batch_size, sentences):
-    ann = AnnoyIndex(512)
+    ann = AnnoyIndex(D)
     batch_sentences = []
     batch_indexes = []
     last_indexed = 0
