@@ -41,11 +41,17 @@ This results in about 91M sentences
 (tf-wiki) 91686995 wiki.sentences.txt
 ```
 
-Further, extract unique sentences
+Further, extract unique sentences. We get about 53M sentences
 ```bash
 (tf-wiki) python uniq_sentences.py -sentences wiki.sentences.txt -uniq wiki.sentences.txt.uniq  
 ```
 ```bash
 (tf-wiki) wc -l wiki.sentences.txt.uniq
 (tf-wiki) 53464766 wiki.sentences.txt.uniq
+```
+
+#### Build Annoy Index
+We use [Annoy Index](https://github.com/spotify/annoy) to index Wikipedia sentences. Note that this requires about 150GB of disk space and 120GB of RAM.
+```bash
+(tf-wiki) python build_annoy_index.py -sentences wiki.sentences.txt.uniq -ann wiki.annoy.index   
 ```
