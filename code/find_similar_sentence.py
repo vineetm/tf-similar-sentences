@@ -51,8 +51,11 @@ def main():
 
         if input_sentence == 'q':
             return
+        print_with_time('Input Sentence: {}'.format(input_sentence))
         sentence_vector = sess.run(embedding_fun, feed_dict={sentences_ph:[input_sentence]})
+        print_with_time('vec done')
         nns = ann.get_nns_by_vector(sentence_vector[0], args.k)
+        print_with_time('nns done')
         similar_sentences = [sentences[nn] for nn in nns]
         for sentence in similar_sentences:
             print(sentence)
