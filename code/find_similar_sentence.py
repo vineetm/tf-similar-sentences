@@ -54,7 +54,8 @@ def main():
         sentence_vector = sess.run(embedding_fun, feed_dict={sentences_ph:[input_sentence]})
         nns = ann.get_nns_by_vector(sentence_vector[0], args.k)
         similar_sentences = [sentences[nn] for nn in nns]
-        print(similar_sentences)
+        for sentence in similar_sentences:
+            print(sentence)
 
 
 
