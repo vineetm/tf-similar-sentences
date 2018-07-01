@@ -1,4 +1,10 @@
 # tf-similar-sentences
+This code can be used to build a fast similar sentence retrieval system using any sentence corpus. The code contains all teh details pertaining to English Wikipedia corpus. 
+
+Feel free to use your own favorite sentence corpus. 
+
+There is a detailed [blog post on medium](https://medium.com/@vineet.mundhra/finding-similar-sentences-using-wikipedia-and-tensorflow-hub-dee2f52ed587) that explains the high level ideas in plain English.
+
 
 #### Installation:
 * Clone the repo:
@@ -9,7 +15,7 @@
     
 * [Install Anaconda](https://www.anaconda.com/download/#macos). Create a new environment. Feel free to replace `tf-wiki` with name of your choice.    
     ```bash
-    conda create -n tf-wiki python=3.7
+    conda create -n tf-wiki python=3.6
     ```
     
 * Install dependencies    
