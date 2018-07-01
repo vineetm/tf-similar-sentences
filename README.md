@@ -9,7 +9,7 @@
     
 * [Install Anaconda](https://www.anaconda.com/download/#macos). Create a new environment. Feel free to replace `tf-wiki` with name of your choice.    
     ```bash
-    conda create -n tf-wiki python=3.6
+    conda create -n tf-wiki python=3.7
     ```
     
 * Install dependencies    
