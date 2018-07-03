@@ -24,6 +24,10 @@ There is a detailed [blog post on medium](https://medium.com/@vineet.mundhra/fin
     (tf-wiki) pip install -r requirements.txt
     python -m spacy download en
     ```
+* Setup Tensorflow Hub cache directory. This is to re-use downloaded model. Add the following to your `~\.bashrc`
+
+    `export TFHUB_CACHE_DIR='/path/to/cache-folder'`
+
 
 #### Get English Wikipedia corpus 
 This requires 15G of diskspace, and took us 2 hours. Speeds could wary. Feel free to replace the XML with [another version](https://dumps.wikimedia.org/enwiki/). You should look for files ending in `pages-articles.xml.bz2`
