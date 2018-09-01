@@ -35,7 +35,7 @@ def main():
         for index, sentence in enumerate(fr):
             if filter_sentence(sentence):
                 continue
-            fw.write(f'{sentence}\n')
+            fw.write(f'{sentence}')
             if index % 5000000 == 0:
                 logging.info(f'Done: {index}')
 
