@@ -29,7 +29,15 @@ def filter_sentence(sentence):
 
 def main():
     args = setup_args()
+    logging.info(args)
 
+    with open(args.sentences) as fr, open(args.filtered, 'w') as fw:
+        for index, sentence in enumerate(fr):
+            if filter_sentence(sentence):
+                continue
+            fw.write(f'{sentence}\n')
+            if index % 5000000 == 0:
+                logging.info(f'Done: {index}')
 
 if __name__ == '__main__':
     main()
